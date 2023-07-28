@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Manage Class Session</title>
+    <link rel="stylesheet" href="static/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Archivo+Black&amp;display=swap">
+    <link rel="stylesheet" href="static/fonts/fontawesome-all.min.css">
+    <link rel="stylesheet" href="static/fonts/font-awesome.min.css">
+    <link rel="stylesheet" href="static/fonts/fontawesome5-overrides.min.css">
+</head>
+
+<body id="page-top">
+    <div id="wrapper">
+        <nav class="navbar navbar-dark textwarning text-warning align-items-start sidebar sidebar-dark accordion bg-gradient-primary p-0">
+            <div class="container-fluid d-flex flex-column p-0"><a class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0" href="#">
+                    <div class="sidebar-brand-icon rotate-n-15"></div>
+                    <div class="sidebar-brand-text mx-3"><span>DASHBOARD</span></div>
+                </a>
+                <hr class="sidebar-divider my-0">
+                <ul class="navbar-nav text-light" id="accordionSidebar">
+                    <li class="nav-item"><a class="nav-link" href="home.html"><i class="fas fa-home"></i><span>Home</span></a></li>
+                    <li class="nav-item"><a class="nav-link" href="create.html"><i class="fa fa-edit"></i><span>Create Class</span></a><a class="nav-link active" href="manage.html"><i class="fa fa-th-list"></i><span>Manage Class</span></a></li>
+                    <li class="nav-item"><a class="nav-link" href="start.html"><i class="fas fa-play-circle"></i><span>Start Session</span></a></li>
+                </ul>
+                <div class="text-center d-none d-md-inline"><button class="btn rounded-circle border-0" id="sidebarToggle" type="button"></button></div>
+            </div>
+        </nav>
+        <div class="d-flex flex-column" id="content-wrapper">
+            <div id="content">
+                <nav class="navbar navbar-light navbar-expand bg-white shadow mb-4 topbar static-top">
+                    <div class="container-fluid"><button class="btn btn-link d-md-none rounded-circle me-3" id="sidebarToggleTop" type="button"><i class="fas fa-bars"></i></button><a class="navbar-brand" href="#"><strong>ONLINE CLASS MONITORING SYSTEM</strong></a>
+                        <ul class="navbar-nav flex-nowrap ms-auto">
+                            <li class="nav-item dropdown no-arrow">
+                                <div class="nav-item dropdown no-arrow"><a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown" href="#"><span class="d-none d-lg-inline me-2 text-gray-600 small">{{ instructor_name }}</span></a>
+                                    
+                                </div>
+                            </li>
+                        </ul><a href="logout.html"><button class="btn btn-primary" type="button">Log Out</button></a>
+                    </div>
+                </nav>
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-6 col-xl-3 mb-4">
+                            <div class="card shadow border-start-primary py-2">
+                                <div class="card-body">
+                                    <div class="row align-items-center no-gutters">
+                                        <div class="col me-2">
+                                            <div class="text-uppercase text-primary fw-bold text-xs mb-1"><span>Class Name</span></div>
+                                            <div class="text-dark fw-bold h5 mb-0"><span>{{ cname }}</span></div>
+                                        </div>
+                                        <div class="col-auto"><i class="fas fa-university fa-2x text-gray-300"></i></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-xl-3 mb-4">
+                            <div class="card shadow border-start-success py-2">
+                                <div class="card-body">
+                                    <div class="row align-items-center no-gutters">
+                                        <div class="col me-2">
+                                            <div class="text-uppercase text-success fw-bold text-xs mb-1"><span>class ID</span></div>
+                                            <div class="text-dark fw-bold h5 mb-0"><span>{{ cid }}</span></div>
+                                        </div>
+                                        <div class="col-auto"><i class="fas fa-file fa-2x text-gray-300"></i></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-xl-3 mb-4">
+                            <div class="card shadow border-start-info py-2">
+                                <div class="card-body">
+                                    <div class="row align-items-center no-gutters">
+                                        <div class="col me-2">
+                                            <div class="text-uppercase text-info fw-bold text-xs mb-1"><span>Sessions Completed (Estimated)</span></div>
+                                            <div class="row g-0 align-items-center">
+                                                <div class="col-auto">
+                                                    <div class="text-dark fw-bold h5 mb-0 me-3" id="perc_text"><span>100%</span></div>
+                                                </div>
+                                                <div class="col">
+                                                    <div class="progress progress-sm">
+                                                        <div class="progress-bar bg-info" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%;" id="perc_meter"><span class="visually-hidden">50%</span></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-auto"><i class="fas fa-clipboard-list fa-2x text-gray-300"></i></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-xl-3 mb-4">
+                            <div class="card shadow border-start-warning py-2">
+                                <div class="card-body">
+                                    <div class="row align-items-center no-gutters">
+                                        <div class="col me-2">
+                                            <div class="text-uppercase text-warning fw-bold text-xs mb-1"><span>Registered STUDENTS</span></div>
+                                            <div class="text-dark fw-bold h5 mb-0"><span>{{ rst }}</span></div>
+                                        </div>
+                                        <div class="col-auto"><i class="far fa-user fa-2x text-gray-300"></i></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-6" style="background: var(--bs-body-bg);">
+                            <h6 style="color: var(--bs-dark);text-align: center;"  ><strong>START DATE : {{ dfrom }}</strong></h6>
+                        </div>
+                        <div class="col-md-6" style="background: var(--bs-body-bg);">
+                            <h6 style="color: var(--bs-dark);text-align: center;"><strong>END DATE : {{ dto }}</strong></h6>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card">
+                        <div class="card-header">
+                            <ul class="nav nav-tabs card-header-tabs"></ul>
+                            <div class="card shadow"></div>
+                        </div>
+                        <div class="card-body">
+                            <div class="row align-items-center no-gutters">
+                                <div class="col me-2">
+                                    <div class="text-dark fw-bold h5 mb-0" style="background: var(--bs-body-bg);"><span>LINK TO REGISTER :&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;http://localhost:5000/register.html?classID={{cid}}</span></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body" style="background: var(--bs-white);">
+                            <p class="text-primary m-0 fw-bold">Available Sessions</p>
+                            <div class="row">
+                                <div class="col-md-6 text-nowrap">
+                                    <div id="dataTable_length" class="dataTables_length" aria-controls="dataTable"></div>
+                                    <div class="card shadow border-start-primary py-2" style="color: var(--bs-blue);background: rgb(255, 255, 255);">
+                                        <div class="card-body">
+                                            <div class="row align-items-center no-gutters">
+                                                <div class="col me-2">
+                                                    <div class="text-uppercase text-primary fw-bold text-xs mb-1"><span>Total Sessions</span></div>
+                                                    <div class="text-dark fw-bold h5 mb-0"><span>{{ TClasses }}</span></div>
+                                                </div>
+                                                <div class="col-auto" style="background: var(--bs-blue);"><i class="fas fa-network-wired fa-2x text-gray-300" style="background: var(--bs-blue);"></i></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="text-md-end dataTables_filter" id="dataTable_filter"><label class="form-label"></label></div><input type="search" class="form-control form-control-sm" aria-controls="dataTable" placeholder="Search" id="search1">
+                                </div>
+                            </div>
+                            <div class="table-responsive table mt-2" id="dataTable-1" role="grid" aria-describedby="dataTable_info">
+                                <table class="table my-0" id="dataTable">
+                                    <thead>
+                                        <tr>
+                                            <th>Session ID</th>
+                                            <th>Date</th>
+                                            <th>Start Time</th>
+                                            <th>End Time</th>
+                                            <th>Students Joined</th>
+                                            <th>Session Info</th>
+                                        </tr>
+                                    </thead>
+                                    {%for i in range(0, TClasses)%}
+                                    <tbody>
+                                        <tr>
+                                            {%for j in range(0, 4)%}
+                                              <td>{{ data[i][j] }}</td>
+                                            {%endfor%}
+                                            <td style="text-align: center;">{{ data[i][4] }}</td>
+                                            <td><a href="sessionInfo.html?SID={{ data[i][0] }}&dfrom={{ data[i][1] }}&cname={{ cname }}&sttime={{ data[i][2] }}&endtime={{ data[i][3] }}"><button class="btn btn-primary" type="button"><strong>Expand &nbsp; <i class="fa fa-external-link"></i></strong></button></a></td>
+                                        </tr>
+                                    </tbody>
+                                    {%endfor%}
+                                    <tfoot>
+                                        <tr></tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <footer class="bg-white sticky-footer">
+                <div class="container my-auto">
+                    <div class="text-center my-auto copyright"></div>
+                </div>
+            </footer>
+        </div><a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
+    </div>
+    <div class="card shadow border-start-success py-2" style="background: var(--bs-body-bg);"></div>
+    <script src="static/bootstrap/js/bootstrap.min.js"></script>
+    <script src="static/js/theme.js"></script>
+    <script>
+            function today() {
+                var today = new Date();
+                var yyyy = today.getFullYear();
+                let mm = today.getMonth() + 1; // Months start at 0!
+                let dd = today.getDate();
+
+                if (dd < 10) dd = '0' + dd;
+                if (mm < 10) mm = '0' + mm;
+
+                today = dd + '/' + mm + '/' + yyyy;
+                return today
+            }
+            var url_string =  window.location.href;
+            var url = new URL(url_string);
+            var stdate = url.searchParams.get("stdate");
+            stdate = new Date(stdate.split('/')[2],stdate.split('/')[1]-1,stdate.split('/')[0]);
+            var enddate = url.searchParams.get("enddate");
+            enddate = new Date(enddate.split('/')[2],enddate.split('/')[1]-1,enddate.split('/')[0]);
+            var todaydate = today();
+            todaydate = new Date(todaydate.split('/')[2],todaydate.split('/')[1]-1,todaydate.split('/')[0]);
+
+            var totaldiff = Math.abs(stdate.getTime() - enddate.getTime());
+
+            if(todaydate<stdate)
+            {
+                document.getElementById("perc_text").innerHTML =  "0%";
+                document.getElementById("perc_meter").style.width =  "0%"; 
+            }
+            else if(todaydate > enddate)
+            {
+                document.getElementById("perc_text").innerHTML =  "100%";
+                document.getElementById("perc_meter").style.width =  "100%"; 
+            }
+            else
+            {
+            //if(todaydate < enddate) 
+            enddate = todaydate;
+
+            var timeDiff = Math.abs(stdate.getTime() - enddate.getTime());
+            //console.log("num = ",timeDiff);
+            //console.log("den = ",totaldiff);
+            var perc = (totaldiff - timeDiff)/totaldiff;
+            perc=100-parseInt(perc*100);
+            //console.log("perc ",perc )
+
+            document.getElementById("perc_text").innerHTML = String(perc)+"%";
+            document.getElementById("perc_meter").style.width = String(perc) + "%"; 
+            //console.log("start date = ",stdate);
+            //console.log("end date = ",enddate);
+            //console.log("today = ",todaydate);
+            }
+    </script>
+
+    <script>
+        function sear()
+        {
+         var el=document.getElementById("search1").value
+         const table = document.querySelector("table");
+         var len=el.length;
+         console.log(len);
+         if(el!="")
+         { 
+                console.log(el)
+                console.log(len)
+                //var table = document.querySelector("table");  
+                var i=0;
+                var found=0;
+                for (var row of table.rows) {  
+                    if(i==0) {i++;continue;}
+                    found=0;
+                  for (var cell of row.cells) {  
+
+                     //if(cell.innerText.substr(0,len).toLowerCase() in el.toLowerCase())
+                    if(cell.innerText.toLowerCase().includes(el.toLowerCase()))
+                    {console.log(row.innerText); found=1;} 
+                    }  
+                    if(found==1)
+                    document.getElementsByTagName("tr")[i].hidden=false;
+                    else document.getElementsByTagName("tr")[i].hidden=true;
+                    i++;
+                }
+                console.log("i = ",i);
+          }
+          else //if(len==0)
+          { 
+            var i=1;
+                for (var row of table.rows) {  
+                  for (var cell of row.cells) {   
+                   document.getElementsByTagName("tr")[i].hidden=false;
+                    i++;
+                }
+            }
+
+           }
+    }
+
+         var input = document.getElementById("search1");
+           input.addEventListener("keydown", function (e) {
+            if (e.key === "Enter") {  
+              sear();
+            }
+          });
+    </script>
+    
+</body>
+
+</html>

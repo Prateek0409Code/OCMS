@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Manage Attendance</title>
+    <link rel="stylesheet" href="static/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Archivo+Black&amp;display=swap">
+    <link rel="stylesheet" href="static/fonts/fontawesome-all.min.css">
+    <link rel="stylesheet" href="static/fonts/font-awesome.min.css">
+    <link rel="stylesheet" href="static/fonts/fontawesome5-overrides.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+	
+	<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
+	<script src="https://igniteui.com/js/external/FileSaver.js"></script>
+	<script src="https://igniteui.com/js/external/Blob.js"></script>
+	<script src="https://cdn-na.infragistics.com/igniteui/latest/js/infragistics.core.js"></script>
+	<script src="https://cdn-na.infragistics.com/igniteui/latest/js/modules/infragistics.ext_core.js"></script>
+	<script src="https://cdn-na.infragistics.com/igniteui/latest/js/modules/infragistics.ext_collections.js"></script>
+	<script src="https://cdn-na.infragistics.com/igniteui/latest/js/modules/infragistics.ext_text.js"></script>
+	<script src="https://cdn-na.infragistics.com/igniteui/latest/js/modules/infragistics.ext_io.js"></script>
+	<script src="https://cdn-na.infragistics.com/igniteui/latest/js/modules/infragistics.ext_ui.js"></script>
+	<script src="https://cdn-na.infragistics.com/igniteui/latest/js/modules/infragistics.documents.core_core.js"></script>
+	<script src="https://cdn-na.infragistics.com/igniteui/latest/js/modules/infragistics.ext_collectionsextended.js"></script>
+	<script src="https://cdn-na.infragistics.com/igniteui/latest/js/modules/infragistics.excel_core.js"></script>
+	<script src="https://cdn-na.infragistics.com/igniteui/latest/js/modules/infragistics.ext_web.js"></script>
+	<script src="https://cdn-na.infragistics.com/igniteui/latest/js/modules/infragistics.xml.js"></script>
+	<script src="https://cdn-na.infragistics.com/igniteui/latest/js/modules/infragistics.documents.core_openxml.js"></script>
+	<script src="https://cdn-na.infragistics.com/igniteui/latest/js/modules/infragistics.excel_serialization_openxml.js"></script>
+</head>
+
+<body id="page-top">
+    <div id="wrapper">
+        <nav class="navbar navbar-dark textwarning text-warning align-items-start sidebar sidebar-dark accordion bg-gradient-primary p-0">
+            <div class="container-fluid d-flex flex-column p-0"><a class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0" href="#">
+                    <div class="sidebar-brand-icon rotate-n-15"></div>
+                    <div class="sidebar-brand-text mx-3"><span>DASHBOARD</span></div>
+                </a>
+                <hr class="sidebar-divider my-0">
+                <ul class="navbar-nav text-light" id="accordionSidebar">
+                    <li class="nav-item"><a class="nav-link" href="home.html"><i class="fas fa-home"></i><span>Home</span></a></li>
+                    <li class="nav-item"><a class="nav-link" href="create.html"><i class="fa fa-edit"></i><span>Create Class</span></a><a class="nav-link active" href="manage.html"><i class="fa fa-th-list"></i><span>Manage Class</span></a></li>
+                    <li class="nav-item"><a class="nav-link" href="start.html"><i class="fas fa-play-circle"></i><span>Start Session</span></a></li>
+                </ul>
+                <div class="text-center d-none d-md-inline"><button class="btn rounded-circle border-0" id="sidebarToggle" type="button"></button></div>
+            </div>
+        </nav>
+        <div class="d-flex flex-column" id="content-wrapper">
+            <div id="content">
+                <nav class="navbar navbar-light navbar-expand bg-white shadow mb-4 topbar static-top">
+                    <div class="container-fluid"><button class="btn btn-link d-md-none rounded-circle me-3" id="sidebarToggleTop" type="button"><i class="fas fa-bars"></i></button><a class="navbar-brand" href="#"><strong>ONLINE CLASS MONITORING SYSTEM</strong></a>
+                        <ul class="navbar-nav flex-nowrap ms-auto">
+                            <li class="nav-item dropdown no-arrow">
+                                <div class="nav-item dropdown no-arrow"><a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown" href="#"><span class="d-none d-lg-inline me-2 text-gray-600 small">{{instructor_name}}</span></a>
+                                    
+                                </div>
+                            </li>
+                        </ul><a href="http://127.0.0.1:5000/logout.html"><button class="btn btn-primary" type="button">Log Out</button></a>
+                    </div>
+                </nav>
+                <h3 class="text-dark mb-4">&nbsp; &nbsp; Class Overall Attendance</h3>
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-6 col-xl-3 mb-4">
+                            <div class="card shadow border-start-info py-2">
+                                <div class="card-body">
+                                    <div class="row align-items-center no-gutters">
+                                        <div class="col me-2">
+                                            <div class="text-uppercase text-success fw-bold text-xs mb-1"><span>CLASS ID</span></div>
+                                            <div class="text-dark fw-bold h5 mb-0"><span>{{cid}}</span></div>
+                                        </div>
+                                        <div class="col-auto"><i class="fas fa-file fa-2x text-gray-300"></i></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-xl-3 mb-4">
+                            <div class="card shadow border-start-success py-2">
+                                <div class="card-body">
+                                    <div class="row align-items-center no-gutters">
+                                        <div class="col me-2">
+                                            <div class="text-uppercase text-primary fw-bold text-xs mb-1"><span>class name</span></div>
+                                            <div class="text-dark fw-bold h5 mb-0"><span>{{cname}}</span></div>
+                                        </div>
+                                        <div class="col-auto"><i class="fas fa-university fa-2x text-gray-300"></i></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="card shadow border-start-primary py-2">
+                                <div class="card-body">
+                                    <div class="row align-items-center no-gutters">
+                                        <div class="col me-2">
+                                            <div class="text-uppercase text-info fw-bold text-xs mb-1"><span>OVERALL ATTENDANCE</span></div>
+                                            <div class="row g-0 align-items-center">
+                                                <div class="col-auto">
+                                                    <div class="text-dark fw-bold h5 mb-0 me-3"><span>{{mxattendance}}%</span></div>
+                                                </div>
+                                                <div class="col">
+                                                    <div class="progress progress-sm">
+                                                        <div class="progress-bar bg-info" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width: {{mxattendance}}%;"><span class="visually-hidden">{{mxattendance}}%</span></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-auto"><i class="fas fa-clipboard-list fa-2x text-gray-300"></i></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-6" style="background: var(--bs-body-bg);">
+                            <hr>
+                            <h6 style="color: var(--bs-dark);text-align: center;"><strong>START DATE: {{dfrom}}</strong></h6>
+                        </div>
+                        <div class="col-md-6" style="background: var(--bs-body-bg);">
+                            <hr>
+                            <h6 style="color: var(--bs-dark);text-align: center;"><strong>END DATE: {{dto}}</strong></h6>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card">
+                        <div class="card-header">
+                            <ul class="nav nav-tabs card-header-tabs"></ul>
+                            <div class="card shadow"></div>
+                        </div>
+                        <div class="card-body" style="background: var(--bs-white);text-align: center;">
+                            <p class="text-primary m-0 fw-bold">STUDENT DETAILS</p>
+                            <div class="row">
+                                <div class="col-md-6 text-nowrap">
+                                    <div id="dataTable_length" class="dataTables_length" aria-controls="dataTable"></div>
+                                    <div class="card shadow border-start-primary py-2" style="color: var(--bs-blue);background: rgb(255, 255, 255);">
+                                        <div class="card-body">
+                                            <div class="row align-items-center no-gutters">
+                                                <div class="col me-2">
+                                                    <div class="text-uppercase text-primary fw-bold text-xs mb-1"><span>Total REGISTERED STUDENTS<br><br></span></div>
+                                                    <div class="text-dark fw-bold h5 mb-0"><span>{{rst}}</span></div>
+                                                </div>
+                                                <div class="col-auto" style="background: var(--bs-blue);"><i class="fas fa-user-tie fa-2x text-gray-300" style="background: var(--bs-blue);"></i></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                    <div class="col-md-6">
+                                    <div class="text-md-end dataTables_filter" id="dataTable_filter">
+                                        <label class="form-label"></label></div><input type="search" class="form-control form-control-sm" aria-controls="dataTable" placeholder="Search" id="search1" >
+                                    </div>
+                            </div>
+                            <center>
+                            <div class="col-md-6">
+                                 
+                                    <div class="col"><button onclick="createFormattingWorkbook()" class="btn btn-primary" type="button" style="width: 283.875px;height: 39px;padding: 4px 8px;text-align: center;margin: 20px;background: var(--bs-blue);"><i class="fa fa-download"></i>&nbsp; &nbsp; GENERATE CSV REPORT</button></div>
+
+                                </div>
+                             </center>       
+                            <hr>
+                            <div class="table-responsive table mt-2" id="dataTable-1" role="grid" aria-describedby="dataTable_info">
+                                <table class="table my-0" id="dataTable">
+                                    <thead>
+                                        <tr>
+                                            <th>Student Name</th>
+                                            <th>ID</th>
+                                            <th style="text-align: center;">Attendance %</th>
+                                        </tr>
+                                    </thead>
+                                    {%for id in data.keys()%}
+                                    <tbody>
+                                        <tr style="color: #000000; background-color:{{ ['#a8ffce' if data[id]['attendance']>=75 else '#FCFF00' if data[id]['attendance']>=60 else '#ffd6d6' if data[id]['attendance']>=45 else '#ff7d7d'][0] }};">
+                                            <td>{{ data[id]["name"] }}</td>
+											<td>{{ id }}</td>
+                                            <td style="text-align: center;">{{ data[id]["attendance"] }}</td>
+                                        </tr>
+                                    </tbody>
+                                    {%endfor%}
+                                    <tfoot>
+                                        <tr></tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <footer class="bg-white sticky-footer">
+                <div class="container my-auto">
+                    <div class="text-center my-auto copyright"></div>
+                </div>
+            </footer>
+        </div><a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
+    </div>
+    <script src="static/bootstrap/js/bootstrap.min.js"></script>
+    <script src="static/js/bs-init.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script src="static/js/theme.js"></script>
+	
+    <script>
+        function createFormattingWorkbook() {
+            var workbook = new $.ig.excel.Workbook($.ig.excel.WorkbookFormat.excel2007);
+            var sheet = workbook.worksheets().add('Sheet1');
+			sheet.columns(0).setWidth(120, $.ig.excel.WorksheetColumnWidthUnit.pixel);
+            sheet.columns(1).setWidth(120, $.ig.excel.WorksheetColumnWidthUnit.pixel);
+            sheet.columns(2).setWidth(120, $.ig.excel.WorksheetColumnWidthUnit.pixel);
+
+            // Add merged regions for regions A1:D2 and E1:G2
+            var mergedCellA1D1 = sheet.mergedCellsRegions().add(0, 0, 0, 2);
+            var mergedCellA1D2 = sheet.mergedCellsRegions().add(1, 0, 1, 2);
+
+            // Add two large headers in merged cells above the data
+            mergedCellA1D1.value('Class: {{cname}}');
+            mergedCellA1D1.cellFormat().alignment($.ig.excel.HorizontalCellAlignment.center);
+            //mergedCellA1D1.cellFormat().fill($.ig.excel.CellFill.createSolidFill('#000000'));
+            //mergedCellA1D1.cellFormat().font().colorInfo(new $.ig.excel.WorkbookColorInfo($.ig.excel.WorkbookThemeColorType.light1));
+            //mergedCellA1D1.cellFormat().font().height(16 * 20);
+
+			var dto='{{dto}}';
+			var tp=dto.split('/');
+			var nt=tp[1]+"/"+tp[0]+"/"+tp[2]
+			if (new Date()<new Date(nt)){
+				var today = new Date();
+				var dd = String(today.getDate()).padStart(2, '0');
+				var mm = String(today.getMonth() + 1).padStart(2, '0');
+				var yyyy = today.getFullYear();
+				dto=dd + '/' + mm + '/' + yyyy;
+			}
+
+            mergedCellA1D2.value('Date From: {{dfrom}} | Date To: '+dto);
+            mergedCellA1D2.cellFormat().alignment($.ig.excel.HorizontalCellAlignment.center);
+            //mergedCellA1D2.cellFormat().fill($.ig.excel.CellFill.createSolidFill('#000000'));
+            //mergedCellA1D2.cellFormat().font().colorInfo(new $.ig.excel.WorkbookColorInfo($.ig.excel.WorkbookThemeColorType.light1));
+            //mergedCellA1D2.cellFormat().font().height(16 * 20);
+			
+			sheet.rows(0).cellFormat().font().bold(true);
+			sheet.rows(1).cellFormat().font().bold(true);
+
+            // Format some rows and columns that should have similar formatting so we don't have to set it on individual cells.
+            sheet.rows(2).cellFormat().font().bold(true);
+            sheet.columns(4).cellFormat().formatString('$#,##0.00_);[Red]($#,##0.00)');
+            sheet.columns(6).cellFormat().formatString('$#,##0.00_);[Red]($#,##0.00)');
+
+            // Add a light color fill to all cells in the A3:G17 region to visually separate it from the rest of the sheet. We can iterate
+            // all cells in the regions by getting an enumerator for the region and enumerating each item.
+            //var light1Fill = $.ig.excel.CellFill.createSolidFill(new $.ig.excel.WorkbookColorInfo($.ig.excel.WorkbookThemeColorType.light1));
+            //var cells = sheet.getRegion('A3:G17').getEnumerator();
+            //while (cells.moveNext()) {
+            //    cells.current().cellFormat().fill(light1Fill);
+            //}
+
+            // Populate the sheet with data
+            sheet.getCell('A3').value('Student Name');
+            sheet.getCell('B3').value('Student ID');
+            sheet.getCell('C3').value('Attendance');
+
+			for (let i=4; i<{{TStudents}}+4; i++) {
+				var tp=document.getElementById('dataTable').rows[i-3];
+				var cl=getColor(tp.cells[2].innerHTML);
+				sheet.getCell('A'+String(i)).value(tp.cells[0].innerHTML);
+				sheet.getCell('A'+String(i)).cellFormat().fill($.ig.excel.CellFill.createSolidFill(cl));
+				
+				sheet.getCell('B'+String(i)).value(tp.cells[1].innerHTML);
+				sheet.getCell('B'+String(i)).cellFormat().fill($.ig.excel.CellFill.createSolidFill(cl));
+				
+				sheet.getCell('C'+String(i)).value(tp.cells[2].innerHTML);
+				sheet.getCell('C'+String(i)).cellFormat().fill($.ig.excel.CellFill.createSolidFill(cl));
+			}
+            saveWorkbook(workbook, "class-{{cname}}.xlsx");
+        }
+		
+		function getColor(val){
+			if (parseFloat(val)>=75) {
+				return '#A8FFCE';
+			} else if (parseFloat(val)>=60) {
+				return '#FCFF00';
+			} else if (parseFloat(val)>=45) {
+				return '#FFD6D6';
+			} else {
+				return '#FF7D7D';
+			}
+		}
+		
+
+        function saveWorkbook(workbook, name) {
+            workbook.save({ type: 'blob' }, function (data) {
+                saveAs(data, name);
+            }, function (error) {
+                alert('Error exporting: : ' + error);
+            });
+        }
+    </script>
+
+    <script>
+        function sear()
+        {
+         var el=document.getElementById("search1").value
+         const table = document.querySelector("table");
+         var len=el.length;
+         console.log(len);
+         if(el!="")
+         { 
+                console.log(el)
+                console.log(len)
+                //var table = document.querySelector("table");  
+                var i=0;
+                var found=0;
+                for (var row of table.rows) {  
+                    if(i==0) {i++;continue;}
+                    found=0;
+                  for (var cell of row.cells) {  
+
+                     //if(cell.innerText.substr(0,len).toLowerCase() in el.toLowerCase())
+                    if(cell.innerText.toLowerCase().includes(el.toLowerCase()))
+                    {console.log(row.innerText); found=1;} 
+                    }  
+                    if(found==1)
+                    document.getElementsByTagName("tr")[i].hidden=false;
+                    else document.getElementsByTagName("tr")[i].hidden=true;
+                    i++;
+                }
+                console.log("i = ",i);
+          }
+          else //if(len==0)
+          { 
+            var i=1;
+                for (var row of table.rows) {  
+                  for (var cell of row.cells) {   
+                   document.getElementsByTagName("tr")[i].hidden=false;
+                    i++;
+                }
+            }
+
+           }
+    }
+
+         var input = document.getElementById("search1");
+           input.addEventListener("keydown", function (e) {
+            if (e.key === "Enter") {  
+              sear();
+            }
+          });
+
+         
+
+    </script>
+
+</body>
+
+</html>
