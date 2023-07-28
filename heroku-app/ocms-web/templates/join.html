@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Join Class</title>
+    <link rel="stylesheet" href="static/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700">
+    <link rel="stylesheet" href="static/css/Header-Blue.css">
+    <link rel="stylesheet" href="static/css/Login-Form-Clean.css">
+    <link rel="stylesheet" href="static/css/Login-Form-Dark.css">
+    <link rel="stylesheet" href="static/css/Navigation-with-Button.css">
+    <link rel="stylesheet" href="static/css/Registration-Form-with-Photo.css">
+    <link rel="stylesheet" href="static/css/style.css">
+</head>
+
+<body>
+    <nav class="navbar navbar-light navbar-expand-md navigation-clean-button">
+        <div class="container"><a class="navbar-brand" href="#">ONLINE CLASS MONITORING SYSTEM</a><button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-2"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button><a href="join.html"><button class="btn btn-primary" type="button" style="color: var(--bs-gray-100);background: var(--bs-red);border-color: var(--bs-pink);">Join Class</button></a>&nbsp;&nbsp;&nbsp;<button class="btn btn-primary" type="button" style="color: var(--bs-gray-100);background: var(--bs-red);border-color: var(--bs-pink);" onclick="regrun()">Register</button>
+            <div class="collapse navbar-collapse" id="navcol-2">
+                <ul class="navbar-nav me-auto"></ul><span class="navbar-text actions"> <a class="login" href="index.html">Log In</a><a class="btn btn-light action-button" role="button" href="signup.html">Sign Up</a></span>
+            </div>
+        </div>
+    </nav>
+    <section class="login-clean" style="background: rgb(241, 247, 252);border-color: var(--bs-pink);">
+        <form class="text-center" method="post" action="{{ url_for('join') }}">
+            <h2 class="visually-hidden">Login Form</h2>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h2 style="text-align: center;">Join Class</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="illustration"></div>
+            <div class="mb-3"><input class="form-control" type="text" name="regid" placeholder="Registration ID"></div>
+            <div class="mb-3"><input class="form-control" type="text" name="classid" placeholder="Class ID" id="cid"></div>
+            <div class="msg" align="center"><font color="red">{{ msg_incorrect }}</font></div>
+            <div class="mb-3"><button class="btn btn-primary d-block w-100" type="submit">Join</button></div><a class="forgot" href="#">You can also join using the 'join link' provided by the instructor</a>
+            <div class="mb-3"><input type="text" name="localCheck" id="lck" placeholder="Localhost Check" style="visibility: hidden;"></div>
+        </form>
+        <script>
+          async function fetchText() {
+              let response = await fetch('http://localhost:5000/status.html');
+                  if (response.status === 200) {
+                      document.getElementById('lck').value = "Active";
+                  }
+              }
+          fetchText();
+        </script>
+    </section>
+    <script src="static/bootstrap/js/bootstrap.min.js"></script>
+    <script>
+            var url_string =  window.location.href;
+            var url = new URL(url_string);
+            var cid = url.searchParams.get("cid");
+            console.log("cid ",cid);
+            if(cid!=null)
+            {
+                console.log("cid inside",cid);
+               document.getElementById("cid").value=cid;
+               document.getElementById("cid").disabled = true;
+            // var sid=  url.searchParams.get("sid");
+            // var cname=  url.searchParams.get("cname");
+            // var Iname=  url.searchParams.get("In");
+            // var freq =  url.searchParams.get("freq");
+            // var stime= url.searchParams.get("st");
+            }
+
+    </script>
+    <script>
+      async function regrun() {
+		fetch('http://localhost:5000/status.html').then((response) => {
+			if (!response.ok) {
+				throw new Error('Something went wrong');
+			}
+			window.open('http://localhost:5000/register.html', '_blank');
+		}).catch((error) => {
+			alert("Application Not Running!");
+		});
+    }
+      //regrun();
+    </script>
+</body>
+
+</html>

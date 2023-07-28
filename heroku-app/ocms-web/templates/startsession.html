@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Start Session</title>
+    <link rel="stylesheet" href="static/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Archivo+Black&amp;display=swap">
+    <link rel="stylesheet" href="static/fonts/fontawesome-all.min.css">
+    <link rel="stylesheet" href="static/fonts/font-awesome.min.css">
+    <link rel="stylesheet" href="static/fonts/fontawesome5-overrides.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+
+<!-- YAAD SE HAATH NHI LAGANA OR CONTACT THE DEV -->
+<body id="page-top" style="color: var(--bs-gray-900);">
+    <div id="wrapper">
+        <div class="d-flex flex-column" id="content-wrapper">
+            <div id="content"> <!-- IDHAR HAATH MAT LAGANA -->
+                <nav class="navbar navbar-light navbar-expand bg-white shadow mb-4 topbar static-top">
+                    <div class="container-fluid"><button class="btn btn-link d-md-none rounded-circle me-3" id="sidebarToggleTop" type="button"><i class="fas fa-bars"></i></button><a class="navbar-brand" href="#"><strong>ONLINE CLASS MONITORING SYSTEM</strong></a>
+                        <div class="d-none d-sm-block topbar-divider"></div>
+                        <ul class="navbar-nav flex-nowrap ms-auto">
+                        </ul><a href="exitsession.html?SID={{ SID }}"><button class="btn btn-primary" type="button" style="text-align: center;background: var(--bs-red);">END SESSION</button></a>
+                    </div>
+                    <p id="fetchtime" style="visibility: hidden;">{{ starttime }}</p>
+                </nav>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="card shadow border-start-primary py-2">
+                                <div class="card-body">
+                                    <div class="row align-items-center no-gutters">
+                                        <div class="col me-2">
+                                            <div class="text-uppercase text-primary fw-bold text-xs mb-1"><span>Class Code: {{ cid }}</span></div>
+                                            <div class="text-dark fw-bold h5 mb-0"><span>{{ cname }}</span></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="card shadow border-start-primary py-2">
+                                <div class="card-body">
+                                    <div class="row align-items-center no-gutters">
+                                        <div class="col me-2">
+                                            <div class="text-uppercase text-primary fw-bold text-xs mb-1"><span>Session ID</span></div>
+                                            <div class="text-dark fw-bold h5 mb-0"><span id="thisisSID">{{ SID }}</span></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="card shadow border-start-primary py-2">
+                                <div class="card-body">
+                                    <div class="row align-items-center no-gutters">
+                                        <div class="col me-2">
+                                            <div class="text-uppercase text-primary fw-bold text-xs mb-1"><span>timer</span></div>
+                                            <div class="text-dark fw-bold h5 mb-0"><span id="c_time"></span></div>
+                                            <script>
+                                                function time_convert(minutes) {
+                                                  var h = Math.floor(minutes / 60);
+                                                  var m = minutes % 60;
+                                                  h = h < 10 ? '0' + h : h;
+                                                  m = m < 10 ? '0' + m : m;
+                                                  return h + ':' + m;
+                                                }
+
+                                                function timer_main()
+                                                {
+                                                   min2=parseInt(document.getElementById('fetchtime').innerHTML)
+
+                                                  current_date = new Date();
+                                                  min = current_date.getMinutes();
+                                                  hr=current_date.getHours();
+                                                  total=hr*60+min;
+                                                  total;
+                                                  c_time=total-min2;
+                                                  if(c_time<0){
+                                                      c_time=c_time+6024;
+                                                  }
+                                                  document.getElementById('c_time').innerHTML=time_convert(c_time);
+                                                }
+                                                timer_main();
+                                                var start_timer = setInterval(function() {
+                                                       timer_main();
+                                                }, 30*1000);
+
+                                               </script>
+                                        </div>
+
+                                        <div class="col-auto"><i class="fas fa-calendar fa-2x text-gray-300"></i></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3" style="text-align: justify;">
+                            <div class="card shadow border-start-primary py-2">
+                                <div class="card-body">
+                                    <div class="row align-items-center no-gutters">
+                                        <div class="col" style="width: 203px;"><a class="btn btn-success btn-icon-split" role="button" style="width: 190.025px;height: 39px;" onclick="runIT()"><span class="text-white-50 icon"><i class="fas fa-sync"></i></span><span class="text-white text" style="width: 135.037px;">Refresh</span></a></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="container-fluid">
+                    <h3 class="text-dark mb-1"></h3>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h1></h1>
+            </div>
+        </div>
+    </div>
+	<div class="container">
+        <div class="card shadow border-start-success py-2" style="background: var(--bs-body-bg);">
+            <div class="card-body">
+                <div class="row align-items-center no-gutters">
+                    <div class="col me-2">
+                        <div class="text-dark fw-bold h5 mb-0"><span>JOIN LINK :&nbsp;<input type="text" width="200" size="80" id="joinid" readonly></input>
+						<button onclick="copythis()">Click to Copy</button></span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr style="height: 2px;">
+    <h2 style="color: var(--bs-gray-900);font-family: Nunito, sans-serif;text-align: center;"><strong>&nbsp;Live Attendance</strong>&nbsp;&nbsp;<a href="#" data-toggle="tooltip" title="Suspicious/inactive students are identified by red-colored rows."><i style='font-size:24px' class='fas'>&#xf06a;</i></a></h2>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12" style="border-left-color: var(--bs-success);background: #ffffff;box-shadow: 0px 0px;color: var(--bs-red);">
+                <div class="table-responsive" style="color: var(--bs-pink);">
+                    <table class="table" id="myTable">
+                      <tr>
+                        <thead>
+                            <th style="text-align: center;color: var(--bs-gray-900);">Student Name</th>
+                            <th style="text-align: center;color: var(--bs-gray-900);">Student ID</th>
+                            <th style="text-align: center;color: var(--bs-gray-900);">Presence Detected</th>
+                            <th style="text-align: center;color: var(--bs-gray-900);">Attendance (%)</th>
+                        </thead>
+                      </tr>
+                      <tbody id="tbd">
+                      </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function myCreateFunction(name, id, presence, attend, sus) {
+          var table = document.getElementById("myTable");
+          var row = table.insertRow(-1);
+		  if (sus==1){
+			row.style.backgroundColor = "#F5B7B1";
+		  }
+		  row.style.color="#000000";
+          var cell1 = row.insertCell(0);
+          var cell2 = row.insertCell(1);
+          var cell3 = row.insertCell(2);
+          var cell4 = row.insertCell(3);
+          cell1.outerHTML = "<td style=\"text-align: center;\">" + name + "</td>";
+          cell2.outerHTML = "<td style=\"text-align: center;\">" + id + "</td>";
+          cell3.outerHTML = "<td style=\"text-align: center;\">" + presence + "</td>";
+          cell4.outerHTML = "<td style=\"text-align: center;\">" + attend + "</td>";
+        }
+
+        async function runIT(SID=document.getElementById('thisisSID').innerHTML, ttaken) {
+          while (document.querySelectorAll('tr').length != 1) {
+             document.getElementById("myTable").deleteRow(-1);
+          }
+          var response = await fetch("https://" + window.location.host + "/getData.html?SID=" + SID);
+          var data = await response.json();
+		  var tp=data[0];
+		  var ttaken=data[1];
+          for (var i=0; i<tp.length; i++){
+            myCreateFunction(tp[i]['name'], tp[i]['sid'], tp[i]['present'].toString() + '/' + ttaken.toString(), Math.round((tp[i]['present']/Math.max(1,ttaken))*100), tp[i]['sus']);
+          }
+        }
+		
+        var fetchdb = setInterval(function() {
+            runIT();
+        }, parseInt('{{freq}}')*1000);
+    </script>
+	<script>
+		// Fixed
+		var url=window.location.href.replace("startsession.html", "joinlink.html")+'&sid='+'{{SID}}'+'&In='+'{{instructor_name}}'+'&st='+'{{starttime}}';
+		document.getElementById("joinid").value=url.replace("#", "")
+		function copythis() {
+			var copyText = document.getElementById("joinid");
+			console.log()
+			copyText.select();
+			copyText.setSelectionRange(0, 99999);
+			navigator.clipboard.writeText(copyText.value);
+		}
+	</script>
+    <script src="static/bootstrap/js/bootstrap.min.js"></script>
+    <script src="static/js/bs-init.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script src="static/js/theme.js"></script>
+
+    <script>
+        function sear()
+        {
+         var el=document.getElementById("search1").value
+         const table = document.querySelector("table");
+         var len=el.length;
+         console.log(len);
+         if(el!="")
+         { 
+                console.log(el)
+                console.log(len)
+                //var table = document.querySelector("table");  
+                var i=0;
+                var found=0;
+                for (var row of table.rows) {  
+                    if(i==0) {i++;continue;}
+                    found=0;
+                  for (var cell of row.cells) {  
+
+                     //if(cell.innerText.substr(0,len).toLowerCase() in el.toLowerCase())
+                    if(cell.innerText.toLowerCase().includes(el.toLowerCase()))
+                    {console.log(row.innerText); found=1;} 
+                    }  
+                    if(found==1)
+                    document.getElementsByTagName("tr")[i].hidden=false;
+                    else document.getElementsByTagName("tr")[i].hidden=true;
+                    i++;
+                }
+                console.log("i = ",i);
+          }
+          else //if(len==0)
+          { 
+            var i=1;
+                for (var row of table.rows) {  
+                  for (var cell of row.cells) {   
+                   document.getElementsByTagName("tr")[i].hidden=false;
+                    i++;
+                }
+            }
+
+           }
+    }
+
+         var input = document.getElementById("search1");
+           input.addEventListener("keydown", function (e) {
+            if (e.key === "Enter") {  
+              sear();
+            }
+          });
+
+    </script>
+	<script>
+	$(document).ready(function(){
+	  $('[data-toggle="tooltip"]').tooltip();   
+	});
+	</script>
+</body>
+
+</html>

@@ -1,0 +1,25 @@
+{
+  "SQL" : {
+    "default" : "",
+    "description" : "Hosted SQL Database",
+    "credentials" : {
+      "database" : "sql6473966",
+      "host" : "sql6.freesqldatabase.com",
+      "username" : "sql6473966",
+      "password" : "TQr9JAPr8d",
+	  "port": "3306"
+    },
+    "version" : "v2"
+  },
+  "API" : {
+	  "path" : "https://ocms1.herokuapp.com",
+	  "description" : "Heroku Hosted 'Aliver' App",
+	  "redirects" : [
+		  "/worker"
+	  ],
+	  "version" : "v0.2"
+  },
+  "AppSettings" : {
+	  "frequency" : "30"
+  }
+}
